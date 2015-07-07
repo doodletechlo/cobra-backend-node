@@ -22,8 +22,8 @@ app.use('/', function(req,res,next){
     next();
 });
 
-app.use('/api/login', login);
-app.use('/api/version', version);
+app.use('/login', login);
+app.use('/version', version);
 
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {
