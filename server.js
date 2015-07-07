@@ -17,12 +17,17 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(cookieParser());
-app.use('/login', login);
-app.use('/version', version);
+app.use('/', function(req,res,next){
+    debug('Request: ', req.url, req.method, req.body);
+    next();
+});
+
+app.use('/api/login', login);
+app.use('/api/version', version);
 
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {
-    logger.db.insert(req.url, req.method);
+    //logger.db.insert(req.url, req.method);
     res.status(404).json({
         code: 'unknownResource',
         description: 'resource not found'
@@ -33,7 +38,7 @@ app.use('/', function(req, res, next) {
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3006');
+var port = normalizePort(process.env.PORT || '3005');
 app.set('port', port);
 
 /**

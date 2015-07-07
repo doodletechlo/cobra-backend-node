@@ -8,7 +8,6 @@
   "scripts": {
     "start": "DEBUG=main nodemon -e js --exec sh bin/execute.sh",
     "dev": "DEBUG=main nodemon -e js --exec sh bin/execute.sh",
-    "local": "DEBUG=main ENV=local nodemon -e js --exec sh bin/execute.sh",
     "test": "jasmine-node --autotest --color --verbose spec"
   },
   "devDependencies": {
