@@ -1,3 +1,3 @@
 module.exports = {
-    db: require('./logging-db')
+    db: require('./data/loggingdb')
 };

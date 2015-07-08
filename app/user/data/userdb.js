@@ -3,12 +3,13 @@ var uuid = require('node-uuid');
 var bcrypt = require('bcrypt');
 var q = require('q');
 
-var common = require('../common');
+var common = require('../../common');
 
 var table = 'dt-user';
 
 module.exports = {
-    getMemberToken: getMemberToken
+    getMemberToken: getMemberToken,
+    putItem: putItem
 };
 
 function getMemberToken(params) {
@@ -44,7 +45,7 @@ function getMemberToken(params) {
     return deferred.promise;
 }
 
-function createUser(params) {
+function putItem(params) {
 
     if (params.password && params.username) {
         bcrypt.hash(params.password, 8, function(err, hash) {

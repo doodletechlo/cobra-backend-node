@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var debug = require('debug')('main');
 
-var login = require('./app/login-route');
+var user = require('./app/user-route');
 var version = require('./app/version-route');
 var logger = require('./app/logging');
 
@@ -22,7 +22,7 @@ app.use('/', function(req,res,next){
     next();
 });
 
-app.use('/login', login);
+app.use('/user', user);
 app.use('/version', version);
 
 // catch 404 and forward to error handler
