@@ -20,4 +20,16 @@ router.post('/login', function(req, res, next) {
         });
 });
 
+router.post('/registration', function(req, res, next) {
+    debug('entered login', req.body);
+    user.db.registerUser(req.body).then(
+        function(token) {
+            res.json(token);
+        },
+        function(err) {
+            res.status(401).json(err);
+
+        });
+});
+
 module.exports = router;
