@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var debug = require('debug')('main');
 
 var user = require('./app/user-route');
+var profile = require('./app/profile-route');
 var version = require('./app/version-route');
 var logger = require('./app/logging');
 
@@ -23,6 +24,7 @@ app.use('/', function(req,res,next){
 });
 
 app.use('/user', user);
+app.use('/profile', profile);
 app.use('/version', version);
 
 // catch 404 and forward to error handler

@@ -1,4 +1,6 @@
 module.exports = {
-    db: require('./data/userdb')
+    create: require('./create'),
+    getMemberToken: require('./getMemberToken'),
+    utility: require('./utility'),
 };
 

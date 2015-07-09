@@ -1,3 +1,4 @@
 module.exports = {
-    db: require('./data/profiledb')
+    create: require('./create'),
+    utility: require('./utility')
 };
