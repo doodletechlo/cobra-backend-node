@@ -7,19 +7,22 @@ module.exports = {
     checkUsername: checkUsername,
 };
 
-function checkUsername(username) {
+function checkUsername(params) {
     var response = true;
     var deferred = q.defer();
-    db.scan(table).then(function(data) {
+    db.scan().then(function(data) {
         data.forEach(function(user) {
-            if (user.username === username) {
+            if (user.username === params.username) {
                 response = false;
             }
         });
         if (response) {
             deferred.resolve();
         } else {
-            deferred.reject();
+            deferred.reject({
+                error: 'usernameTaken',
+                description:'Username taken'
+            });
         }
     });
     return deferred.promise;

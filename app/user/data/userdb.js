@@ -13,7 +13,7 @@ module.exports = {
     putItem: putItem
 };
 
-function scan(){
+function scan() {
     return common.db.scan(table);
 }
 
@@ -41,7 +41,9 @@ function putItem(params) {
             };
             common.db.putItem(item, table).then(
                 function(val) {
-                    deferred.resolve({customerId: customerId});
+                    deferred.resolve({
+                        customerId: customerId
+                    });
                 },
                 function(err) {
                     deferred.reject(err);

@@ -21,9 +21,9 @@ router.post('/login', function(req, res, next) {
         });
 });
 
-router.post('/checkUsername', function(req, res, next) {
+router.post('/checkusername', function(req, res, next) {
     debug('entered login', req.body);
-    user.checkUsername(req.body).then(
+    user.utility.checkUsername(req.body).then(
         function(token) {
             res.json(token);
         },
@@ -37,9 +37,11 @@ router.post('/create', function(req, res, next) {
     debug('entered login', req.body);
     user.create(req.body).then(
         function(token) {
+            debug('created user', token);
             res.json(token);
         },
         function(err) {
+            debug('error creating user', err);
             res.status(401).json(err);
 
         });

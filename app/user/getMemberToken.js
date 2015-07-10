@@ -10,13 +10,14 @@ function getMemberToken(params) {
     var deferred = q.defer();
     if (!params.password || !params.username) {
         deferred.reject({
-            code: 'missingFields',
+            error: 'missingFields',
             description: 'Required fields: username, password'
         });
     } else {
         var token = false;
-        db.scan(table).then(function(data) {
+        db.scan().then(function(data) {
             data.forEach(function(val) {
+                debug('gettoken', params, val);
                 if (bcrypt.compareSync(params.password, val.password) && params.username === val.username) {
                     token = val.customerId;
                 }
@@ -27,7 +28,7 @@ function getMemberToken(params) {
                 });
             } else {
                 deferred.reject({
-                    code: 'denied',
+                    error: 'denied',
                     description: 'Invalid credentials'
                 });
             }

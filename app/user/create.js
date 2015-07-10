@@ -7,21 +7,13 @@ module.exports = createUser;
 
 function createUser(params) {
     var deferred = q.defer();
-    if (params.password && params.username) {
-        db.putItem(params).then(
-            function(val) {
-                deferred.resolve(customerId);
-            },
-            function(err) {
-                deferred.reject(err);
-            });
-    } else {
-        deferred.reject({
-            code: 'missingFields',
-            description: 'Required Fields: username, password'
+    db.putItem(params).then(
+        function(val) {
+            deferred.resolve(val);
+        },
+        function(err) {
+            deferred.reject(err);
         });
-    }
-
     return deferred.promise;
 
 }
