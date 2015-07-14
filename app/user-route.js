@@ -60,4 +60,5 @@ router.post('/updatePassword', function(req, res, next) {
 
         });
 });
+
 module.exports = router;
