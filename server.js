@@ -9,6 +9,7 @@ var user = require('./app/user-route');
 var profile = require('./app/profile-route');
 var version = require('./app/version-route');
 var logger = require('./app/logging');
+var token = require('./app/token-route');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use('/', function(req,res,next){
 app.use('/user', user);
 app.use('/profile', profile);
 app.use('/version', version);
+app.use('/token', token);
 
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {

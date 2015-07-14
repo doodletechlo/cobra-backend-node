@@ -9,9 +9,9 @@ var router = express.Router();
 // private dependencies
 var user = require('./user');
 
-router.post('/getToken', function(req, res, next) {
+router.post('/validate', function(req, res, next) {
     debug('entered login', req.body);
-    user.getToken(req.body).then(
+    user.validate(req.body).then(
         function(token) {
             res.json(token);
         },

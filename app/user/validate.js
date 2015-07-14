@@ -4,9 +4,9 @@ var q = require('q');
 
 var db = require('./data/userdb');
 
-module.exports = getToken;
+module.exports = validate;
 
-function getToken(params) {
+function validate(params) {
     var deferred = q.defer();
     if (!params.password || !params.username) {
         deferred.reject({
@@ -14,17 +14,17 @@ function getToken(params) {
             description: 'Required fields: username, password'
         });
     } else {
-        var token = false;
+        var customerId = false;
         db.scan().then(function(data) {
             data.forEach(function(val) {
                 debug('gettoken', params, val);
                 if (bcrypt.compareSync(params.password, val.password) && params.username === val.username) {
-                    token = val.customerId;
+                    customerId = val.customerId;
                 }
             });
-            if (token) {
+            if (customerId) {
                 deferred.resolve({
-                    token: bcrypt.hashSync(token, 8)
+                    customerId: customerId
                 });
             } else {
                 deferred.reject({

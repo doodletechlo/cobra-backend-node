@@ -1,39 +1,17 @@
 var debug = require('debug')('main');
 var q = require('q');
 
-var db = require('./data/userdb');
+var db = require('./data/tokendb');
 
 module.exports = {
-    checkUsername: checkUsername,
-    createUser: createUser,
-    updatePassword: updatePassword,
+    createToken: createToken,
+    getUser: getUser
 };
 
-function checkUsername(params) {
-    var response = true;
-    var deferred = q.defer();
-    db.scan().then(function(data) {
-        data.forEach(function(user) {
-            if (user.username === params.username) {
-                response = false;
-            }
-        });
-        if (response) {
-            deferred.resolve();
-        } else {
-            deferred.reject({
-                error: 'usernameTaken',
-                description:'Username taken'
-            });
-        }
-    });
-    return deferred.promise;
-}
-
-function createUser(params){
+function createToken(params){
     return db.putItem(params);
 }
 
-function updatePassword(params){
-    return db.updatePassword(params);
+function getUser(params){
+    return db.getItem(params);
 }

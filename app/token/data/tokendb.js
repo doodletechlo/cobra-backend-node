@@ -8,17 +8,18 @@ var common = require('../../common');
 var table = 'dt-token';
 
 module.exports = {
-    scan: scan,
-    putItem: putItem
+    putItem: putItem,
+    getItem: getItem
 };
 
 function scan() {
     return common.db.scan(table);
 }
-function getCustomerId(token){
+
+function getItem(params){
     var key = {
-        "ssn": {
-            "S": ssn
+        "token": {
+            "S": params.token
         }
     };
     return common.db.getItem(key, table);
@@ -30,7 +31,7 @@ function putItem(params) {
         var token = uuid.v4();
         var item = {
             customerId: {
-                'S': customerId
+                'S': params.customerId
             },
             token: {
                 'S': token
@@ -42,6 +43,7 @@ function putItem(params) {
                 'S': new Date().toString()
             }
         };
+        debug('create token in tokendb', item);
         common.db.putItem(item, table).then(
             function(val) {
                 deferred.resolve({
