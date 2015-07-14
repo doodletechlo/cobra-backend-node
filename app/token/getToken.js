@@ -4,9 +4,9 @@ var q = require('q');
 
 var db = require('./data/userdb');
 
-module.exports = getMemberToken;
+module.exports = getToken;
 
-function getMemberToken(params) {
+function getToken(params) {
     var deferred = q.defer();
     if (!params.password || !params.username) {
         deferred.reject({

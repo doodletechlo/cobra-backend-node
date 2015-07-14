@@ -56,3 +56,20 @@ function putItem(params) {
     return deferred.promise;
 
 }
+
+function updatePassword(params) {
+    var key = {
+        customerId: {
+            'S': params.customerId
+        },
+    };
+    var expression = "set password = :val1";
+    var values = {
+        ':val1': {
+            'S': bcrypt.hashSync(params.password, 8)
+        }
+    };
+
+    return common.db.updateItem(key, expression, values, table);
+}
+

@@ -9,9 +9,9 @@ var router = express.Router();
 // private dependencies
 var user = require('./user');
 
-router.post('/login', function(req, res, next) {
+router.post('/getToken', function(req, res, next) {
     debug('entered login', req.body);
-    user.getMemberToken(req.body).then(
+    user.getToken(req.body).then(
         function(token) {
             res.json(token);
         },
@@ -35,9 +35,23 @@ router.post('/checkusername', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     debug('entered login', req.body);
-    user.create(req.body).then(
+    user.utility.createUser(req.body).then(
         function(token) {
             debug('created user', token);
+            res.json(token);
+        },
+        function(err) {
+            debug('error creating user', err);
+            res.status(401).json(err);
+
+        });
+});
+
+router.post('/updatePassword', function(req, res, next) {
+    debug('entered login', req.body);
+    user.utility.updatePassword(req.body).then(
+        function(token) {
+            debug('update password', token);
             res.json(token);
         },
         function(err) {
