@@ -4,8 +4,13 @@ var q = require('q');
 var db = require('./data/profiledb.js');
 
 module.exports = {
-    checkEmail: checkEmail
+    checkEmail: checkEmail,
+    getUser: getUser
 };
+
+function getUser(params) {
+    return db.getItem(params);
+}
 
 function checkEmail(params) {
     var response = true;

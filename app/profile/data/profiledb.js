@@ -7,11 +7,22 @@ var table = 'dt-profile';
 
 module.exports = {
     scan: scan,
-    putItem: putItem
+    putItem: putItem,
+    getItem: getItem
 };
 
 function scan() {
     return common.db.scan(table);
+}
+
+function getItem(params){
+    debug('getitem profiledb', params);
+    var key = {
+        "customerId": {
+            "S": params.customerId
+        }
+    };
+    return common.db.getItem(key, table);
 }
 
 function putItem(params) {

@@ -1,6 +1,7 @@
 var AWS = require('aws-sdk');
 var debug = require('debug')('main');
 var q = require('q');
+var lo = require('lodash');
 AWS.config.update({
     region: 'us-west-2'
 });
@@ -80,7 +81,8 @@ function getItem(key, table) {
     };
 
     db.getItem(params, function(err, data) {
-        if (err) {
+        debug('DynamoDB, getitem', params, err, data);
+        if (err || lo.isEmpty(data)) {
             deferred.reject(err);
         } else {
             try {

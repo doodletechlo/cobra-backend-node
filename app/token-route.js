@@ -29,7 +29,6 @@ router.post('/getuser', function(req, res, next) {
         },
         function(err) {
             res.status(401).json(err);
-
         });
 });
 

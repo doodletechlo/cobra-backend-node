@@ -20,6 +20,18 @@ router.post('/checkemail', function(req, res, next) {
         });
 });
 
+router.get('/getuser', function(req, res, next) {
+    debug('entered profile route: checkemail', req.headers);
+    profile.utility.getUser(req.headers).then(
+        function() {
+            res.send('OK');
+        },
+        function(err) {
+            res.status(401).json(err);
+
+        });
+});
+
 router.post('/create', function(req, res, next) {
     debug('entered profile create', req.body);
     profile.create(req.body).then(
