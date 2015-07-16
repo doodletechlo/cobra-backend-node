@@ -23,12 +23,13 @@ router.post('/checkemail', function(req, res, next) {
 router.get('/getuser', function(req, res, next) {
     debug('entered profile route: checkemail', req.headers);
     profile.utility.getUser(req.headers).then(
-        function() {
-            res.send('OK');
+        function(val) {
+            debug('entered profile route: getuser', val);
+            res.json(val);
         },
         function(err) {
-            res.status(401).json(err);
-
+            debug('entered profile route: getuser error', err);
+            res.status(404).json(err);
         });
 });
 
