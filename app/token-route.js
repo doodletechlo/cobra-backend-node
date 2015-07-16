@@ -9,7 +9,7 @@ var router = express.Router();
 // private dependencies
 var token = require('./token');
 
-router.post('/getToken', function(req, res, next) {
+router.post('/gettoken', function(req, res, next) {
     debug('entered login', req.body);
     token.utility.createToken(req.body).then(
         function(token) {
@@ -21,7 +21,7 @@ router.post('/getToken', function(req, res, next) {
         });
 });
 
-router.post('/getUser', function(req, res, next) {
+router.post('/getuser', function(req, res, next) {
     debug('entered login', req.body);
     token.utility.getUser(req.body).then(
         function(user) {
