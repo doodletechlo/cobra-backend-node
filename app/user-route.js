@@ -47,9 +47,26 @@ router.post('/create', function(req, res, next) {
         });
 });
 
-router.post('/updatePassword', function(req, res, next) {
-    debug('entered login', req.body);
-    user.utility.updatePassword(req.body).then(
+router.post('/checkpassword', function(req, res, next) {
+    var params = {
+        customerId: req.headers.customerId,
+        password: req.body.password
+    };
+    user.checkPassword(params).then(
+        function() {
+            res.json();
+        },
+        function(err) {
+            res.status(401).json(err);
+        });
+});
+
+router.post('/updatepassword', function(req, res, next) {
+    var params = {
+        customerId: req.headers.customerId,
+        password: req.body.password
+    };
+    user.utility.updatePassword(params).then(
         function(token) {
             debug('update password', token);
             res.json(token);

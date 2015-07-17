@@ -8,7 +8,8 @@ var table = 'dt-profile';
 module.exports = {
     scan: scan,
     putItem: putItem,
-    getItem: getItem
+    getItem: getItem,
+    updateItem: updateItem
 };
 
 function scan() {
@@ -23,6 +24,21 @@ function getItem(params){
         }
     };
     return common.db.getItem(key, table);
+}
+
+function updateItem(params) {
+    var key = {
+        customerId: {
+            'S': params.customerid
+        },
+    };
+    var expression = "set email = :val1";
+    var values = {
+        ':val1': {
+            'S': params.email
+        },
+    };
+    return common.db.updateItem(key, expression, values, table);
 }
 
 function putItem(params) {

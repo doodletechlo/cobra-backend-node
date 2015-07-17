@@ -10,11 +10,23 @@ var table = 'dt-user';
 
 module.exports = {
     scan: scan,
-    putItem: putItem
+    putItem: putItem,
+    getItem: getItem,
+    updatePassword: updatePassword
 };
 
 function scan() {
     return common.db.scan(table);
+}
+
+function getItem(params){
+    debug('getitem userdb', params);
+    var key = {
+        "customerId": {
+            "S": params.customerid
+        }
+    };
+    return common.db.getItem(key, table);
 }
 
 function putItem(params) {
