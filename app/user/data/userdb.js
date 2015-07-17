@@ -76,9 +76,10 @@ function updatePassword(params) {
         },
     };
     var expression = "set password = :val1";
+    debug('updatepassword', params);
     var values = {
         ':val1': {
-            'S': bcrypt.hashSync(params.password, 8)
+            'S': bcrypt.hashSync(params.newPassword, 8)
         }
     };
 

@@ -63,16 +63,17 @@ router.post('/checkpassword', function(req, res, next) {
 
 router.post('/updatepassword', function(req, res, next) {
     var params = {
-        customerId: req.headers.customerId,
-        password: req.body.password
+        customerId: req.headers.customerid,
+        newPassword: req.body.newPassword,
     };
+    debug('updatepassword route', req.headers, req.body);
     user.utility.updatePassword(params).then(
-        function(token) {
-            debug('update password', token);
-            res.json(token);
+        function(val) {
+            debug('update password', val);
+            res.json(val);
         },
         function(err) {
-            debug('error creating user', err);
+            debug('error update password', err);
             res.status(401).json(err);
 
         });
