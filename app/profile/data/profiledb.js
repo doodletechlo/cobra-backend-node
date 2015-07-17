@@ -20,7 +20,7 @@ function getItem(params){
     debug('getitem profiledb', params);
     var key = {
         "customerId": {
-            "S": params.customerid
+            "S": params.customerId
         }
     };
     return common.db.getItem(key, table);

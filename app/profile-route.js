@@ -21,8 +21,12 @@ router.post('/checkemail', function(req, res, next) {
 });
 
 router.get('/getuser', function(req, res, next) {
-    debug('entered profile route: checkemail', req.headers);
-    profile.utility.getUser(req.headers).then(
+    var params = {
+        customerId: req.headers.customerid
+    };
+    debug('entered profile route: checkemail', params);
+
+    profile.utility.getUser(params).then(
         function(val) {
             debug('entered profile route: getuser', val);
             res.json(val);
@@ -50,7 +54,7 @@ router.post('/update', function(req, res, next) {
         customerId: req.headers.customerid,
         email: req.body.email
     };
-    debug('entered profile update', params, req.headers);
+    debug('entered profile update', params );
     profile.update(params).then(
         function() {
             res.send('OK');

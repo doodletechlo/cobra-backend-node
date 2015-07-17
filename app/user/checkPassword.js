@@ -9,10 +9,10 @@ module.exports = checkPassword;
 function checkPassword(params) {
     var deferred = q.defer();
     db.getItem(params).then(function(data) {
+        debug('checkpassword func, user ', data, params);
         if (bcrypt.compareSync(params.password, data.password)) {
             deferred.resolve();
-        }
-        else {
+        } else {
             deferred.reject();
         }
 

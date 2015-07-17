@@ -23,7 +23,7 @@ function getItem(params){
     debug('getitem userdb', params);
     var key = {
         "customerId": {
-            "S": params.customerid
+            "S": params.customerId
         }
     };
     return common.db.getItem(key, table);
@@ -79,7 +79,7 @@ function updatePassword(params) {
     debug('updatepassword', params);
     var values = {
         ':val1': {
-            'S': bcrypt.hashSync(params.newPassword, 8)
+            'S': bcrypt.hashSync(params.password, 8)
         }
     };
 
