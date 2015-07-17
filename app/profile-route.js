@@ -44,4 +44,20 @@ router.post('/create', function(req, res, next) {
 
         });
 });
+
+router.post('/update', function(req, res, next) {
+    var params ={
+        customerId: req.headers.customerid,
+        email: req.body.email
+    };
+    debug('entered profile update', params, req.headers);
+    profile.update(params).then(
+        function() {
+            res.send('OK');
+        },
+        function(err) {
+            res.status(401).json(err);
+
+        });
+});
 module.exports = router;

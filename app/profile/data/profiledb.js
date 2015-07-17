@@ -29,7 +29,7 @@ function getItem(params){
 function updateItem(params) {
     var key = {
         customerId: {
-            'S': params.customerid
+            'S': params.customerId
         },
     };
     var expression = "set email = :val1";

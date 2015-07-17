@@ -1,4 +1,5 @@
 module.exports = {
     create: require('./create'),
-    utility: require('./utility')
+    utility: require('./utility'),
+    update: require('./update')
 };
