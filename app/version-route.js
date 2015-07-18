@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     exec('git log --stat -1', function(error, stdout, stderr) {
         if (error) {
-            res.status(404);
+            res.status(500);
         } else {
             res.status(200);
         }

@@ -21,10 +21,7 @@ function checkUsername(params) {
         if (response) {
             deferred.resolve();
         } else {
-            deferred.reject({
-                error: 'usernameTaken',
-                description:'Username taken'
-            });
+            deferred.reject();
         }
     });
     return deferred.promise;

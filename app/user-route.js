@@ -24,11 +24,11 @@ router.post('/validate', function(req, res, next) {
 router.post('/checkusername', function(req, res, next) {
     debug('entered login', req.body);
     user.utility.checkUsername(req.body).then(
-        function(token) {
-            res.json(token);
+        function() {
+            res.end();
         },
         function(err) {
-            res.status(401).json(err);
+            res.status(401).end();
 
         });
 });
@@ -42,7 +42,7 @@ router.post('/create', function(req, res, next) {
         },
         function(err) {
             debug('error creating user', err);
-            res.status(401).json(err);
+            res.status(500).json(err);
 
         });
 });
@@ -55,7 +55,7 @@ router.post('/checkpassword', function(req, res, next) {
     debug('checkpassword', params);
     user.checkPassword(params).then(
         function() {
-            res.json();
+            res.end();
         },
         function(err) {
             res.status(401).json(err);
@@ -70,12 +70,11 @@ router.post('/updatepassword', function(req, res, next) {
     debug('updatepassword route', params);
     user.utility.updatePassword(params).then(
         function(val) {
-            debug('update password', val);
-            res.json(val);
+            res.end();
         },
         function(err) {
             debug('error update password', err);
-            res.status(401).json(err);
+            res.status(500).json(err);
 
         });
 });

@@ -12,11 +12,10 @@ router.post('/checkemail', function(req, res, next) {
     debug('entered profile route: checkemail', req.body);
     profile.utility.checkEmail(req.body).then(
         function() {
-            res.send('OK');
+            res.end();
         },
         function(err) {
-            res.status(401).json(err);
-
+            res.status(400).json(err);
         });
 });
 
@@ -39,12 +38,12 @@ router.get('/getuser', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     debug('entered profile create', req.body);
-    profile.create(req.body).then(
+    profile.utility.create(req.body).then(
         function() {
-            res.send('OK');
+            res.end();
         },
         function(err) {
-            res.status(401).json(err);
+            res.status(500).json(err);
 
         });
 });
@@ -55,12 +54,12 @@ router.post('/update', function(req, res, next) {
         email: req.body.email
     };
     debug('entered profile update', params );
-    profile.update(params).then(
+    profile.utility.update(params).then(
         function() {
-            res.send('OK');
+            res.end();
         },
         function(err) {
-            res.status(401).json(err);
+            res.status(500).json(err);
 
         });
 });

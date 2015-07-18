@@ -5,11 +5,21 @@ var db = require('./data/profiledb.js');
 
 module.exports = {
     checkEmail: checkEmail,
-    getUser: getUser
+    getUser: getUser,
+    update: update,
+    create: create
 };
 
 function getUser(params) {
     return db.getItem(params);
+}
+
+function create(params) {
+    return db.putItem(params);
+}
+
+function update(params) {
+    return db.updateItem(params);
 }
 
 function checkEmail(params) {
@@ -24,10 +34,7 @@ function checkEmail(params) {
         if (response) {
             deferred.resolve();
         } else {
-            deferred.reject({
-                error: 'emailTaken',
-                description:'Email taken'
-            });
+            deferred.reject();
         }
     });
     return deferred.promise;

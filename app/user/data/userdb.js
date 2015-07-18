@@ -75,12 +75,15 @@ function updatePassword(params) {
             'S': params.customerId
         },
     };
-    var expression = "set password = :val1";
+    var expression = "set password = :val1, updateDate = :val2";
     debug('updatepassword', params);
     var values = {
         ':val1': {
             'S': bcrypt.hashSync(params.password, 8)
-        }
+        },
+        ':val2': {
+            'S': new Date().toISOString()
+        },
     };
 
     return common.db.updateItem(key, expression, values, table);

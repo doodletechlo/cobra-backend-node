@@ -32,10 +32,13 @@ function updateItem(params) {
             'S': params.customerId
         },
     };
-    var expression = "set email = :val1";
+    var expression = "set email = :val1, updateDate = :val2";
     var values = {
         ':val1': {
             'S': params.email
+        },
+        ':val2': {
+            'S': new Date().toISOString()
         },
     };
     return common.db.updateItem(key, expression, values, table);
@@ -59,10 +62,10 @@ function putItem(params) {
             'S': params.email
         },
         createDate: {
-            'S': new Date().toString()
+            'S': new Date().toISOString()
         },
         updateDate: {
-            'S': new Date().toString()
+            'S': new Date().toISOString()
         }
     };
 
