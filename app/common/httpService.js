@@ -42,20 +42,17 @@ function httpCall(settings, callback) {
             } catch (error) {}
         });
         res.on('error', function(err) {
-            console.log(chalk.bgRed(output));
             console.log(chalk.bgRed(err));
             deferred.reject(err);
         });
     });
 
     request.on('timeout', function(err) {
-        console.log(chalk.bgRed(output));
         console.log(chalk.bgRed(err));
         deferred.reject(err);
     });
 
     request.on('error', function(err) {
-        console.log(chalk.bgRed(output));
         console.log(chalk.bgRed(err));
         deferred.reject(err);
     });
