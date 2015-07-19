@@ -65,15 +65,6 @@ function httpCall(settings, callback) {
     return deferred.promise;
 }
 
-function httpCallToken(settings, token) {
-    if (!settings.headers) {
-        settings.headers = {};
-    }
-    settings.headers.Authorization = 'Bearer ' + token;
-
-    return httpCall(settings);
-}
-
 module.exports = {
     httpCall: httpCall,
     httpCallToken: httpCallToken,
