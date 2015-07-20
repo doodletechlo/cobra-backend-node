@@ -67,5 +67,4 @@ function httpCall(settings, callback) {
 
 module.exports = {
     httpCall: httpCall,
-    httpCallToken: httpCallToken,
 };
